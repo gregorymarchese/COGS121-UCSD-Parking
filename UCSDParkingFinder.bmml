@@ -1,0 +1,202 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1495" measuredH="596" mockupW="1477" mockupH="583">
+  <controls>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="127" y="225" w="-1" h="-1" measuredW="64" measuredH="64" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>SearchIcon%7Cxlarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="92" y="289" w="-1" h="-1" measuredW="135" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>UCSD%20Parking%20Locater</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::iPhone" x="18" y="23" w="-1" h="-1" measuredW="282" measuredH="573" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <model>IPhone5</model>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Arrow" x="245" y="350" w="208" h="10" measuredW="150" measuredH="100" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*tap*</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::iPhone" x="384" y="23" w="-1" h="-1" measuredW="282" measuredH="573" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <model>IPhone5</model>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::ComboBox" x="485" y="309" w="-1" h="-1" measuredW="80" measuredH="24" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>4%3A00%20PM</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::ComboBox" x="485" y="377" w="-1" h="-1" measuredW="79" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>8%3A00%20PM</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="511" y="276" w="-1" h="-1" measuredW="30" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>From</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="511" y="346" w="-1" h="-1" measuredW="27" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Until</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Label" x="424" y="169" w="-1" h="-1" measuredW="204" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Choose%20your%20Parking%20Permit%20Type%3A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Label" x="464" y="247" w="-1" h="-1" measuredW="123" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>I%27m%20planning%20to%20stay...</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::ComboBox" x="476" y="201" w="-1" h="-1" measuredW="99" measuredH="24" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Student%20%28S%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::PointyButton" x="464" y="465" w="-1" h="-1" measuredW="123" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>10066329</color>
+        <direction>right</direction>
+        <newLayout>true</newLayout>
+        <text>Find%20Me%20A%20Spot%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::iPhone" x="825" y="13" w="-1" h="-1" measuredW="282" measuredH="573" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <model>IPhone5</model>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Arrow" x="587" y="473" w="264" h="10" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*tap*</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::RoundButton" x="871" y="169" w="75" h="57" measuredW="32" measuredH="32" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16776960</color>
+        <text>113/350</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::RoundButton" x="982" y="416" w="84" h="58" measuredW="32" measuredH="32" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13576743</color>
+        <text>249/250</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::RoundButton" x="982" y="225" w="75" h="62" measuredW="32" measuredH="32" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>50/200</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Label" x="888" y="321" w="-1" h="-1" measuredW="156" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28MAP%20OF%20UCSD%20CAMPUS%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Label" x="888" y="122" w="-1" h="-1" measuredW="151" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Available%20Parking%20Spaces%3A</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Map" x="852" y="148" w="225" h="353" measuredW="252" measuredH="222" zOrder="14" locked="false" isInGroup="-1"/>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::PointyButton" x="856" y="465" w="-1" h="-1" measuredW="59" measuredH="27" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>10066329</color>
+        <direction>left</direction>
+        <newLayout>true</newLayout>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Arrow" x="1044" y="252" w="220" h="10" measuredW="150" measuredH="100" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*tap*</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::iPhone" x="1213" y="13" w="-1" h="-1" measuredW="282" measuredH="573" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <model>IPhone5</model>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="1276" y="122" w="-1" h="-1" measuredW="149" measuredH="21" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Gilman%20Parking%20Structure</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::PointyButton" x="1276" y="465" w="-1" h="-1" measuredW="156" measuredH="27" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>10066329</color>
+        <direction>left</direction>
+        <newLayout>true</newLayout>
+        <text>Back%20to%20Campus%20Map</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::DataGrid" x="1239" y="228" w="223" h="143" measuredW="176" measuredH="153" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <hLines>true</hLines>
+        <rowHeight>44</rowHeight>
+        <text>Level%2C%20%23%20of%20Vacant%20Spaces%0A1%2C%203%0A2%2C%2012%20%0A3%2C%2032%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Label" x="1245" y="187" w="-1" h="-1" measuredW="211" measuredH="21" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>50%20Available%20/%20200%20Total%20%28S%29%20Spaces</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Label" x="1264" y="401" w="-1" h="-1" measuredW="174" measuredH="21" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Next%20Best%20Parking%20Structure%3A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Link" x="1272" y="436" w="-1" h="-1" measuredW="157" measuredH="19" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hopkin%27s%20Parking%20Structure</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::PointyButton" x="65" y="342" w="-1" h="-1" measuredW="180" measuredH="27" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>10066329</color>
+        <direction>right</direction>
+        <newLayout>true</newLayout>
+        <text>Start%20Looking%20for%20Parking</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="429" y="434" w="-1" h="-1" measuredW="192" measuredH="21" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <color>40463</color>
+        <text>412%20Availble%20/%20800%20Total%20Spaces%20</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Label" x="494" y="413" w="-1" h="-1" measuredW="63" measuredH="21" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <color>0</color>
+        <italic>false</italic>
+        <text>Estimated%3A</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::Label" x="476" y="137" w="-1" h="-1" measuredW="97" measuredH="21" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Look%20for%20Parking</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
