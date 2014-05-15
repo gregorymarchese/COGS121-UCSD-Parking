@@ -1,0 +1,28 @@
+{
+  "name": "MapMyFriends",
+  "version": "0.0.1",
+  "author": "Sophie M.Y. Lee, Gregory Marchese",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.x",
+    "ejs": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-facebook": "*",
+    "dotenv": "*",
+    "fbgraph": "*",
+    "twit": "*",
+    "express-partials": "~0.2.0",
+    "async": "*",
+    "string": "~1.8.0",
+    "sentiment": "~1.0.0-alpha",
+    "gramophone": "0.0.3",
+    "Sentimental": "~1.0.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
