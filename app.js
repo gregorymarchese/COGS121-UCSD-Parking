@@ -1,48 +1,35 @@
+//dependencies for each module used
 var express = require('express');
-var partials = require('express-partials');
-var app = express();
-var passport = require('passport');
 var http = require('http');
-var util = require('util');
 var path = require('path');
+var handlebars = require('express3-handlebars');
+var app = express();
 
+//route files to load
+var index = require('./routes/index');
+var search = require('./routes/search');
+var parking = require('./routes/parking');
+var info = require('./routes/info');
 
-var port = process.env.PORT || 3000;
+//database setup - uncomment to set up your database
+//var mongoose = require('mongoose');
+//mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/DATABASE1);
 
+//Configures the Template engine
+app.engine('handlebars', handlebars());
+app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/views');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.bodyParser());
 
-var dotenv  = require('dotenv');
-	dotenv.load();
+//routes
+app.get('/', index.view);
+app.get('/search', search.view);
+app.get('/parking', parking.view);
+app.get('/info', info.view);
 
-
-
-// configure Express
-app.configure(function()
-{
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
-	app.use(partials()); 
-	app.use(express.logger());
-	app.use(express.cookieParser());
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.session({ secret: 'keyboard cat' }));
-	app.use(app.router);
-	app.use(express.static(__dirname + '/public'));
+//set environment ports and start application
+app.set('port', process.env.PORT || 3000);
+http.createServer(app).listen(app.get('port'), function(){
+	console.log('Express server listening on port ' + app.get('port'));
 });
-
-app.get('/', function(req, res)
-{
-	res.render('index', { user: req.user});
-});
-
-
-
-function ensureAuthenticated(req, res, next)
-{
-	if (req.isAuthenticated())
-	{
-		return next();
-	}
-	res.redirect('/');
-}
-app.listen(port);
