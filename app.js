@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var search = require('./routes/search');
 var parking = require('./routes/parking');
 var info = require('./routes/info');
+var map = require('./routes/map');
 
 //database setup - uncomment to set up your database
 //var mongoose = require('mongoose');
@@ -27,6 +28,11 @@ app.get('/', index.view);
 app.get('/search', search.view);
 app.get('/parking', parking.view);
 app.get('/info', info.view);
+app.get('/map', map.view);
+//app.get('/funcroute', funcroute.functname);
+//res.json(data);
+//route for json object will return json object with list of all different parking structures and 
+//avgs chances for each strucutre
 
 //set environment ports and start application
 app.set('port', process.env.PORT || 3000);
