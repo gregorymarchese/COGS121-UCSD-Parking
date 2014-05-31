@@ -20,7 +20,8 @@
     "string": "~1.8.0",
     "sentiment": "~1.0.0-alpha",
     "gramophone": "0.0.3",
-    "Sentimental": "~1.0.1"
+    "Sentimental": "~1.0.1",
+    "bootstrap-timepicker": "*"
   },
   "engines": {
     "node": "0.10.x"
