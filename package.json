@@ -21,11 +21,7 @@
     "sentiment": "~1.0.0-alpha",
     "gramophone": "0.0.3",
     "Sentimental": "~1.0.1",
-<<<<<<< HEAD
-    "bootstrap-timepicker": "*"
-=======
     "express3-handlebars": "~0.5.0"
->>>>>>> 0b31ae05d25c117d9f8b18d16ae53313b7805e68
   },
   "engines": {
     "node": "0.10.x"
