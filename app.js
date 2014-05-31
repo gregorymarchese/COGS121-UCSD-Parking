@@ -9,7 +9,8 @@ var handlebars = require('express3-handlebars');
 var dotenv = require('dotenv');
 dotenv.load();
 var geolib = require('geolib');
-
+var schedule = require('node-schedule');
+var  client= require('twilio')(process.env.TWILIO_ID, process.env.TWILIO_SECRET);
 
 
 
@@ -297,6 +298,55 @@ io.on('connection', function(socket)
   {
     io.emit('realtime', msg);
   });
+});
+
+
+
+//================================================================================================================================================================================================
+app.post('/registernotification', function(req, res)
+{
+	var date = new Date();
+    var future =  new Date(date.getFullYear(), date.getMonth(), date.getDate(), req.body.hour,req.body.min ,0,0);
+	if(req.body.num.length != 12 )
+	{
+		res.json({ status: "bad phone" });
+	}
+	if(req.body.message.length <= 0 )
+	{
+		res.json({ status: "bad message" });
+	}
+	if(req.body.hour > 24 || req.body.hour < 0)
+	{
+		res.json({ status: "bad hours" });
+	}
+	if(req.body.min > 60 || req.body.min < 0)
+	{
+		res.json({ status: "bad minutes" });
+	}
+	var statusToSend = "empty";
+    var job = schedule.scheduleJob(future,function()
+    {
+			client.sendMessage
+			({
+		    	to:req.body.num, // Any number Twilio can deliver to
+		    	from: '+15672085000', // A number you bought from Twilio and can use for outbound communication
+		    	body: req.body.message // body of the SMS message
+			}, 
+			function(err, responseData)
+			{
+		    if (!err)
+		    {
+		        statusToSend = "success";
+		       // res.json({ status: statusToSend });
+		    }
+	    	else
+	    	{
+	    		statusToSend = "error";
+	    		//res.json({ status: statusToSend });
+	    	}
+    	})
+	});
+	res.json({ status: "scheduled" });
 });
 //================================================================================================================================================================================================
 //set environment ports and start application
