@@ -32,16 +32,10 @@
 	db.connect();
 
 //=========================================================================================	ROUTES
-	var index = require('./routes/index');
-	var search = require('./routes/search');
-	var parking = require('./routes/parking');
-	var info = require('./routes/info');
+	var error = require('./routes/error');
 	var map = require('./routes/map');
-	app.get('/', index.view);
-	app.get('/search', search.view);
-	app.get('/parking', parking.view);
-	app.get('/info', info.view);
-	app.get('/map', map.view);
+	app.get('/', map.view);
+	//app.get('/*', error.view);
 
 //================================================================================================================================================================================================
 // INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY

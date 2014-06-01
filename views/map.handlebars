@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>parkTRITON</title>  
+    <title>parkTRITON :: locator</title>  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -32,7 +32,35 @@
                 lng: -117.2380,
                 zoom: 14
             });
+            map.addMarker(
+            {
+                lat: 32.883985, 
+                lng: -117.239276,
+                title: 'Hopkins',
+                infoWindow:
+                {
+                    content: '<p id="hopkinIW">Hopkins</p>'
+                },
+                click: function(e)
+                {
+                    $.getJSON( "projected/Hopkins", function(data)
+                    {
+                      console.log( data );
+                    })
+                      .done(function(data) {
+                        console.log( data );
+                        document.getElementById("hopkinIW").innerHTML = data.LOT+'<br />'data.AVG;
+                      })
+                      .fail(function(data) {
+                        console.log( data );
+                      })
+                      .always(function() {
+                        console.log( "complete" );
+                      });
+                }
+            });
         });
+
         
     </script>
 </head>
@@ -91,17 +119,20 @@
         </div>  
     </div><!--/.container-->
 <script type="text/javascript">
-$('.slider').slider({
-          formater: function(value) {
-            var hour = value;
-            var ampm = 'am';
-            if(value >= 12)
-            {
-                hour = value -12;
-                ampm = 'pm';
-            }
-            return 'Current Time: '+hour + ':00 '+ampm;
-          }})
+$('.slider').slider(
+{
+  formater: function(value)
+  {
+    var hour = value;
+    var ampm = 'am';
+    if(value >= 12)
+    {
+        hour = value -12;
+        ampm = 'pm';
+    }
+    return 'Current Time: '+hour + ':00 '+ampm;
+  }
+})
   .on('slideStop', function(ev){
             var hour = ev.value;
             var ampm = 'am';
