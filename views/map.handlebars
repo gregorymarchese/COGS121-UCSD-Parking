@@ -39,20 +39,27 @@
                 title: 'Hopkins',
                 infoWindow:
                 {
-                    content: '<p id="hopkinIW">Hopkins</p>'
+                    content: '<p style="width:200px; height: 200px; overflow: hidden;" id="hopkinIW">Hopkins</p>'
                 },
                 click: function(e)
                 {
                     $.getJSON( "projected/Hopkins", function(data)
                     {
-                      console.log( data );
+                     
                     })
-                      .done(function(data) {
-                        document.getElementById("hopkinIW").innerHTML = data.LOT+'<br />'+data.AVG;
+                      .done(function(data)
+                      {
+                        var LOT = data[0].LOT;
+                        var AVG = data[0].AVG;
+                       document.getElementById("hopkinIW").innerHTML = '<h2>'+LOT+'</h2><hr /><h4>'+AVG+'</h4>';
                       })
-                      .fail(function(data) {
+                      .fail(function(data)
+                      {
+                       
                       })
-                      .always(function() {
+                      .always(function(data)
+                      {
+
                       });
                 }
             });
