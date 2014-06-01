@@ -23,13 +23,17 @@
     <link rel="stylesheet" type="text/css" href="css/offcanvas.css"/>
     <link rel="stylesheet" type="text/css" href="css/slider.css"/>
     <script type="text/javascript">
-            $(document).ready(function(){
-      map = new GMaps({
-        el: '#map',
-        lat: 32.8810,
-        lng: -117.2380,
-        zoom: 14
-      });});
+        $(document).ready(function()
+        {
+            var map = new GMaps(
+            {
+                el: '#map',
+                lat: 32.8810,
+                lng: -117.2380,
+                zoom: 14
+            });
+        });
+        
     </script>
 </head>
     
@@ -58,40 +62,59 @@
       </div>
     </div>
     
-    <br>
+    
 
    <div class="container">
-
-       <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-9">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-xs-12 col-sm-9">
+                <div id="map" style="height: 500px; background-color:#000;"></div>
+            </div>
           
-          <div id="map" style="height: 500px; background-color:#000;"></div>
-            
-          
-        </div>
-          
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Select Your Permit Type</a>
-            <a href="#" class="list-group-item">Student (S)</a>
-            <a href="#" class="list-group-item">Graudate Student (B)</a>
-            <a href="#" class="list-group-item">Faculty (A)</a>
-            <a href="#" class="list-group-item">Visitor (V)</a>
-          </div>
-        </div><!--/span-->
-      </div><!--/row-->
-    <hr>
-    <div class="row">
-    <div class="well col-lg-12">
-        <input type="text" class="slider" value="12:00AM" id="sl1" >
-    </div>
-</div>  
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+              <div class="list-group">
+                <a href="#" class="list-group-item active">Select Your Permit Type</a>
+                <a href="#" class="list-group-item">Student (S)</a>
+                <a href="#" class="list-group-item">Graudate Student (B)</a>
+                <a href="#" class="list-group-item">Faculty (A)</a>
+                <a href="#" class="list-group-item">Visitor (V)</a>
+              </div>
+            </div><!--/span-->
+        </div><!--/row-->
+        <hr />
+        <div class="row">
+            <div class="well col-lg-6 col-md-6">
+                <input type="text" class="slider" value="12:00AM" id="sl1" data-slider-min="8" data-slider-max="17" data-slider-handle="square">
+            </div>
+            <div class="well col-lg-6 col-md-6">
+                <p id="updateme">Ready to find parking</p>
+            </div>
+        </div>  
     </div><!--/.container-->
+<script type="text/javascript">
+$('.slider').slider({
+          formater: function(value) {
+            var hour = value;
+            var ampm = 'am';
+            if(value >= 12)
+            {
+                hour = value -12;
+                ampm = 'pm';
+            }
+            return 'Current Time: '+hour + ':00 '+ampm;
+          }})
+  .on('slideStop', function(ev){
+            var hour = ev.value;
+            var ampm = 'am';
 
-    <script>
-        $('.slider').slider();
-    </script>
+            if(ev.value >= 12)
+            {
+                hour = ev.value -12;
+                ampm = 'pm';
+            }
+    document.getElementById("updateme").innerHTML = "Currently Selected Time: " + hour + ":00 "+ampm;
+  });</script>
+
+
 
 </body>
 </html>
