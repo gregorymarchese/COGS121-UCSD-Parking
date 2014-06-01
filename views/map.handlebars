@@ -48,14 +48,11 @@
                       console.log( data );
                     })
                       .done(function(data) {
-                        console.log( data );
-                        document.getElementById("hopkinIW").innerHTML = data.LOT+'<br />'data.AVG;
+                        document.getElementById("hopkinIW").innerHTML = data.LOT+'<br />'+data.AVG;
                       })
                       .fail(function(data) {
-                        console.log( data );
                       })
                       .always(function() {
-                        console.log( "complete" );
                       });
                 }
             });
