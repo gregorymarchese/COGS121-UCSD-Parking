@@ -1,51 +1,50 @@
-//dependencies for each module used
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-//var server = http.createServer(app);
-var io = require('socket.io')(http);
-var path = require('path');
-var handlebars = require('express3-handlebars');
-var dotenv = require('dotenv');
-dotenv.load();
-var geolib = require('geolib');
-var schedule = require('node-schedule');
-var  client= require('twilio')(process.env.TWILIO_ID, process.env.TWILIO_SECRET);
+//=========================================================================================	UI/SOCKETS
+	var express = require('express');
+	var app = express();
+	var http = require('http').Server(app);
+	var io = require('socket.io')(http);
+	var path = require('path');
+	var handlebars = require('express3-handlebars');
+	var dotenv = require('dotenv');
+	dotenv.load();
 
+//=========================================================================================	TEXT NOTIFICATIONS
+	var schedule = require('node-schedule');
+	var client= require('twilio')(process.env.TWILIO_ID, process.env.TWILIO_SECRET);
+	var geolib = require('geolib');
 
+//=========================================================================================	APP ENGINE
+	app.engine('handlebars', handlebars());
+	app.set('view engine', 'handlebars');
+	app.set('views', __dirname + '/views');
+	app.use(express.static(path.join(__dirname, 'public')));
+	app.use(express.bodyParser());
 
-//route files to load
-var index = require('./routes/index');
-var search = require('./routes/search');
-var parking = require('./routes/parking');
-var info = require('./routes/info');
-var map = require('./routes/map');
+//=========================================================================================	MYSQL
+	var mysql = require('mysql');
+	var db = mysql.createConnection(
+	{
+	  host     : process.env.SQLHOST,
+	  user     : process.env.SQLUSER,
+	  password : process.env.SQLPASS,
+	  database : process.env.SQLDB
+	});
+	db.connect();
 
+//=========================================================================================	ROUTES
+	var index = require('./routes/index');
+	var search = require('./routes/search');
+	var parking = require('./routes/parking');
+	var info = require('./routes/info');
+	var map = require('./routes/map');
+	app.get('/', index.view);
+	app.get('/search', search.view);
+	app.get('/parking', parking.view);
+	app.get('/info', info.view);
+	app.get('/map', map.view);
 
-//Configures the Template engine
-app.engine('handlebars', handlebars());
-app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/views');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.bodyParser());
-
-var mysql = require('mysql');
-var db = mysql.createConnection(
-{
-  host     : process.env.SQLHOST,
-  user     : process.env.SQLUSER,
-  password : process.env.SQLPASS,
-  database : process.env.SQLDB
-});
-db.connect();
-
-//routes
-app.get('/', index.view);
-app.get('/search', search.view);
-app.get('/parking', parking.view);
-app.get('/info', info.view);
-app.get('/map', map.view);
-
+//================================================================================================================================================================================================
+// INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY
 //================================================================================================================================================================================================
 
 
@@ -71,8 +70,8 @@ app.get('/map', map.view);
 
 
 //================================================================================================================================================================================================
-
-
+// OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY	OCCUPANCY
+//================================================================================================================================================================================================
 //GET ALL OCCUPANCY
 	app.get('/occupancy', function(req,res)
 	{
@@ -115,7 +114,8 @@ app.get('/map', map.view);
 
 
 //================================================================================================================================================================================================
-
+// PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION	PROJECTION
+//================================================================================================================================================================================================
 
 //GET GENERAL CAMPUS PROJECTION
 	app.get('/projected', function(req,res)
@@ -265,7 +265,8 @@ app.get('/map', map.view);
 
 
 //================================================================================================================================================================================================
-
+//GEO	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	
+//================================================================================================================================================================================================
 
 //FIND DISTANCE BETWEEN LAT/LONS
 	app.get('/distance/:lat1/:lng1/:lat2/:lng2', function(req, res)
@@ -287,6 +288,8 @@ app.get('/map', map.view);
 	    res.send(nearest);
 	});
 //================================================================================================================================================================================================
+//REALTIME 	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME	REALTIME 		
+//================================================================================================================================================================================================
 app.get('/realtime', function(req, res)
 {
   res.sendfile(__dirname + '/index.html');
@@ -302,6 +305,8 @@ io.on('connection', function(socket)
 
 
 
+//================================================================================================================================================================================================
+//TEXT MESSAGE		TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE
 //================================================================================================================================================================================================
 app.post('/registernotification', function(req, res)
 {
@@ -328,27 +333,27 @@ app.post('/registernotification', function(req, res)
     {
 			client.sendMessage
 			({
-		    	to:req.body.num, // Any number Twilio can deliver to
-		    	from: '+15672085000', // A number you bought from Twilio and can use for outbound communication
-		    	body: req.body.message // body of the SMS message
+		    	to:req.body.num,
+		    	from: '+15672085000',
+		    	body: req.body.message
 			}, 
 			function(err, responseData)
 			{
 		    if (!err)
 		    {
 		        statusToSend = "success";
-		       // res.json({ status: statusToSend });
 		    }
 	    	else
 	    	{
 	    		statusToSend = "error";
-	    		//res.json({ status: statusToSend });
 	    	}
     	})
 	});
 	res.json({ status: "scheduled" });
 });
 //================================================================================================================================================================================================
+//LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER	LAUNCHER
+////================================================================================================================================================================================================
 //set environment ports and start application
 app.set('port', process.env.PORT || 3000);
 http.listen(app.get('port'), 
