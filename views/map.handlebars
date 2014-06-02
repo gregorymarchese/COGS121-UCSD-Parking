@@ -31,11 +31,15 @@
     </style>
     <script type="text/javascript">
         var hour = 8; //global var so that all objects can access current hour. Initial to 8 am so we dont face NULL problems.
+        var userCOORDS;
+        var userLAT;
+        var userLON;
+        var map;
     </script>
     <script type="text/javascript">
         $(document).ready(function()
         {
-            var map = new GMaps(
+            map = new GMaps(
             {
                 el: '#map',
                 lat: 32.8810,
@@ -129,12 +133,12 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="well">
-                    <form action="">
+                    <form id="openparking" action="">
                         
                             <input id="spotinfo" class="form-control" type="text" placeholder="Describe the Spot!" />
                         
                         
-                            <button type="submit" class="btn btn-primary" onclick="getLocation()">Open Spot Here!</button>
+                            <button type="submit" class="btn btn-primary">Open Spot Here!</button>
                         
                     </form>
                   
@@ -178,11 +182,14 @@ $('.slider').slider(
     <script type="text/javascript">
 
     var socket = io.connect();
-      $('form').submit(function()
+      $('#openparking').submit(function()
       {
+        initiateGeoLocation();
         var myObject =
         {
-            message: $('#spotinfo').val()
+            message: $('#spotinfo').val(),
+            lat: userLAT,
+            lon: userLON
         }
         socket.emit('realtime', myObject);
         $('#spotinfo').val('');
@@ -190,9 +197,32 @@ $('.slider').slider(
       });
       socket.on('realtime', function(msg)
       {
-        alert(msg.message);
+        console.log(msg);
+        alert(msg.lat);
+        map.addMarker(
+            {
+                lat: msg.lat, 
+                lng: msg.lon,
+                title: msg.message,
+                infoWindow:
+                {
+                    content: '<p class="popup_content" style="width:100px; height: 100px; overflow: hidden;" id="hopkinIW">'+msg.message+'</p>'
+                }
+            });
       });
-
+   var initiateGeoLocation = function() {
+        navigator.geolocation.getCurrentPosition(setNewCoordinates, null, {
+            enableHighAccuracy: true,
+            maximumAge: 0
+        });
+    };
+    var setNewCoordinates = function(pos)
+    {
+        userCOORDS = pos.coords;
+        userLAT = (Math.floor(userCOORDS.latitude*10000000)/10000000);
+        userLON =  (Math.floor(userCOORDS.longitude*10000000)/10000000);
+    };
+    $(document).ready(initiateGeoLocation());
     </script>
 
 

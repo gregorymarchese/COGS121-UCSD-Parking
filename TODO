@@ -1,7 +1,9 @@
 TODO:
 =================================================================
--fix white text on white background on the map popover
+
 -add the JSON loading of various map locations
 	- need to get LAT/LON of major garages and spaces.
--event driven socket.io notification popup.
--integrate HTML5 geolocate 
+
+- decide how to remove map pins based on broadcast system, or decide to not put on the map to begin with.
+	-timer seems most easy.
+	
