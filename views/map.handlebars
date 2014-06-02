@@ -198,7 +198,6 @@ $('.slider').slider(
       socket.on('realtime', function(msg)
       {
         console.log(msg);
-        alert(msg.lat);
         map.addMarker(
             {
                 lat: msg.lat, 
