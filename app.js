@@ -293,7 +293,7 @@ io.on('connection', function(socket)
 {
   socket.on('realtime', function(msg)
   {
-    io.emit('realtime', msg);
+    socket.broadcast.emit('realtime', msg);
   });
 });
 

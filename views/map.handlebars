@@ -14,6 +14,7 @@
     <![endif]-->        
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap-slider.js"></script>
     <script type="text/javascript" src="js/offcanvas.js"></script>
@@ -22,6 +23,15 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>     
     <link rel="stylesheet" type="text/css" href="css/offcanvas.css"/>
     <link rel="stylesheet" type="text/css" href="css/slider.css"/>
+    <style>
+    .popup_content
+    {
+        color: #000 !important;
+    }
+    </style>
+    <script type="text/javascript">
+        var hour = 8; //global var so that all objects can access current hour. Initial to 8 am so we dont face NULL problems.
+    </script>
     <script type="text/javascript">
         $(document).ready(function()
         {
@@ -39,11 +49,11 @@
                 title: 'Hopkins',
                 infoWindow:
                 {
-                    content: '<p style="width:200px; height: 200px; overflow: hidden;" id="hopkinIW">Hopkins</p>'
+                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="hopkinIW">Hopkins</p>'
                 },
                 click: function(e)
                 {
-                    $.getJSON( "projected/Hopkins", function(data)
+                    $.getJSON( "projected/Hopkins/A/"+hour, function(data)
                     {
                      
                     })
@@ -51,7 +61,7 @@
                       {
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
-                       document.getElementById("hopkinIW").innerHTML = '<h2>'+LOT+'</h2><hr /><h4>'+AVG+'</h4>';
+                       document.getElementById("hopkinIW").innerHTML = '<h2>'+LOT+'</h2><hr /><h4>Average Open: '+AVG+'<br />at '+hour+':00</h4>';
                       })
                       .fail(function(data)
                       {
@@ -101,9 +111,9 @@
           
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
               <div class="list-group">
-                <a href="#" class="list-group-item active">Select Your Permit Type</a>
+                <a href="#" class="list-group-item active">Permit Type:</a>
                 <a href="#" class="list-group-item">Student (S)</a>
-                <a href="#" class="list-group-item">Graudate Student (B)</a>
+                <a href="#" class="list-group-item">Graudate (B)</a>
                 <a href="#" class="list-group-item">Faculty (A)</a>
                 <a href="#" class="list-group-item">Visitor (V)</a>
               </div>
@@ -111,11 +121,23 @@
         </div><!--/row-->
         <hr />
         <div class="row">
-            <div class="well col-lg-6 col-md-6">
-                <input type="text" class="slider" value="12:00AM" id="sl1" data-slider-min="8" data-slider-max="17" data-slider-handle="square">
+            <div class="col-lg-6 col-md-6">
+                <div class="well">
+                    <input type="text" class="slider" value="12:00AM" id="sl1" data-slider-min="8" data-slider-max="17" data-slider-handle="square">
+                    <p id="updateme">Ready to find parking</p>
+                </div>
             </div>
-            <div class="well col-lg-6 col-md-6">
-                <p id="updateme">Ready to find parking</p>
+            <div class="col-lg-6 col-md-6">
+                <div class="well">
+                    <form action="">
+                        
+                            <input id="spotinfo" class="form-control" type="text" placeholder="Describe the Spot!" />
+                        
+                        
+                            <button type="submit" class="btn btn-primary" onclick="getLocation()">Open Spot Here!</button>
+                        
+                    </form>
+                  
             </div>
         </div>  
     </div><!--/.container-->
@@ -124,7 +146,7 @@ $('.slider').slider(
 {
   formater: function(value)
   {
-    var hour = value;
+     hour = value;
     var ampm = 'am';
     if(value > 12)
     {
@@ -139,7 +161,7 @@ $('.slider').slider(
   }
 })
   .on('slideStop', function(ev){
-            var hour = ev.value;
+            hour = ev.value;
             var ampm = 'am';
 
             if(ev.value > 12)
@@ -153,7 +175,25 @@ $('.slider').slider(
     }
     document.getElementById("updateme").innerHTML = "Currently Selected Time: " + hour + ":00 "+ampm;
   });</script>
+    <script type="text/javascript">
 
+    var socket = io.connect();
+      $('form').submit(function()
+      {
+        var myObject =
+        {
+            message: $('#spotinfo').val()
+        }
+        socket.emit('realtime', myObject);
+        $('#spotinfo').val('');
+        return;
+      });
+      socket.on('realtime', function(msg)
+      {
+        alert(msg.message);
+      });
+
+    </script>
 
 
 </body>
