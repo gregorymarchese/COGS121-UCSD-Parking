@@ -1,0 +1,8 @@
+TODO:
+==============================================
+-add bootstrap button to send a message about open parking spots.
+-fix white text on white background on the map popover
+-add the JSON loading of various map locations
+	- need to get LAT/LON of major garages and spaces.
+-event driven socket.io notification popup.
+-integrate HTML5 geolocate 
