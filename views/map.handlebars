@@ -133,14 +133,14 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="well">
-                    <form id="openparking" action="">
+                    
                         
                             <input id="spotinfo" class="form-control" type="text" placeholder="Describe the Spot!" />
                         
                         
-                            <button type="submit" class="btn btn-primary">Open Spot Here!</button>
+                            <button type="submit" class="btn btn-primary" onclick="doSomething()">Open Spot Here!</button>
                         
-                    </form>
+                   
                   
             </div>
         </div>  
@@ -182,7 +182,8 @@ $('.slider').slider(
     <script type="text/javascript">
 
     var socket = io.connect();
-      $('#openparking').submit(function()
+      //$('#openparking').submit(function()
+      function doSomething()
       {
         initiateGeoLocation();
         var myObject =
@@ -193,11 +194,11 @@ $('.slider').slider(
         }
         socket.emit('realtime', myObject);
         $('#spotinfo').val('');
-        return;
-      });
+        return false;
+      };
+
       socket.on('realtime', function(msg)
       {
-        console.log(msg);
         map.addMarker(
             {
                 lat: msg.lat, 
