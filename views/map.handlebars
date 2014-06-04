@@ -202,37 +202,6 @@
                       });
                 }
             });
-              map.addMarker(
-            { 
-                lat: 32.880557, 
-                lng: -117.243445,
-                title: 'P208',
-                infoWindow:
-                {
-                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="P208IW">P208</p>'
-                },
-                click: function(e)
-                {
-                    $.getJSON( "projected/P208/A/"+hour, function(data)
-                    {
-                     
-                    })
-                      .done(function(data)
-                      {
-                        var LOT = data[0].LOT;
-                        var AVG = data[0].AVG;
-                       document.getElementById("P208IW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr><center><h5> Average Number of Spaces Open at '+ hour + ':00</h5></center>'+ '<center><h2>'+AVG+'</h2></center><br />';
-                      })
-                      .fail(function(data)
-                      {
-                       
-                      })
-                      .always(function(data)
-                      {
-
-                      });
-                }
-            });
         });
 
         
