@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>tritonPark :: Locator</title>  
+    <title>tritonPARK :: locator</title>  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/favicon.png">
@@ -52,6 +52,7 @@
                 lat: 32.883985, 
                 lng: -117.239276,
                 title: 'Hopkins',
+                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
                 infoWindow:
                 {
                     content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="hopkinIW">Hopkins</p>'
@@ -66,7 +67,7 @@
                       {
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
-                       document.getElementById("hopkinIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr><center><h5> Average Number of Spaces Open at '+ hour + ':00</h5></center>'+ '<center><h2>'+AVG+'</h2></center><br />';
+                       document.getElementById("hopkinIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
                       })
                       .fail(function(data)
                       {
@@ -83,6 +84,7 @@
                 lat: 32.884326, 
                 lng: -117.242982,
                 title: 'Pangea',
+                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
                 infoWindow:
                 {
                     content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="pangeaIW">Pangea</p>'
@@ -97,7 +99,7 @@
                       {
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
-                       document.getElementById("pangeaIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr><center><h5> Average Number of Spaces Open at '+ hour + ':00</h5></center>'+ '<center><h2>'+AVG+'</h2></center><br />';
+                       document.getElementById("pangeaIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
                       })
                       .fail(function(data)
                       {
@@ -114,6 +116,7 @@
                 lat: 32.877384, 
                 lng: -117.233585,
                 title: 'Gilman',
+                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
                 infoWindow:
                 {
                     content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="gilmanIW">Gilman</p>'
@@ -128,7 +131,7 @@
                       {
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
-                       document.getElementById("gilmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr><center><h5> Average Number of Spaces Open at '+ hour + ':00</h5></center>'+ '<center><h2>'+AVG+'</h2></center><br />';
+                       document.getElementById("gilmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
                       })
                       .fail(function(data)
                       {
@@ -145,6 +148,7 @@
                 lat: 32.753918, 
                 lng: -117.167601,
                 title: 'Arbor',
+                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
                 infoWindow:
                 {
                     content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="arborIW">Arbor</p>'
@@ -159,7 +163,7 @@
                       {
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
-                       document.getElementById("arborIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr><center><h5> Average Number of Spaces Open at '+ hour + ':00</h5></center>'+ '<center><h2>'+AVG+'</h2></center><br />';
+                       document.getElementById("arborIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
                       })
                       .fail(function(data)
                       {
@@ -176,6 +180,7 @@
                 lat: 32.753882, 
                 lng: -117.164689,
                 title: 'Bachman',
+                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
                 infoWindow:
                 {
                     content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="bachmanIW">Bachman</p>'
@@ -190,7 +195,8 @@
                       {
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
-                       document.getElementById("bachmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr><center><h5> Average Number of Spaces Open at '+ hour + ':00</h5></center>'+ '<center><h2>'+AVG+'</h2></center><br />';
+                       document.getElementById("bachmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
+                       
                       })
                       .fail(function(data)
                       {
@@ -256,7 +262,7 @@
                     <p id="updateme">Select Hour</p>
                 </div></center>
                 
-                </div>
+                
                 <div class="col-lg-6 col-md-6">
                     <div class="well">
                             <center>
@@ -327,6 +333,7 @@ $('.slider').slider(
                 lat: msg.lat, 
                 lng: msg.lon,
                 title: msg.message,
+                icon  : 'http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png',
                 infoWindow:
                 {
                     content: '<p class="popup_content" style="width:100px; height: 100px; overflow: hidden;" id="hopkinIW">'+msg.message+'</p>'

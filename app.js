@@ -295,6 +295,7 @@ io.on('connection', function(socket)
   socket.on('realtime', function(msg)
   {
     socket.broadcast.emit('realtime', msg);
+    console.log(msg);
   });
 });
 
