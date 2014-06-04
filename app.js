@@ -277,6 +277,7 @@
 		    "Hopkins": {latitude: 32.883985, longitude: -117.239276},
 		    "Gilman": {latitude: 32.877710, longitude: -117.233664},
 		    "Pangea": {latitude: 32.884272, longitude: -117.242982},
+            
 		};
 	    var nearest = geolib.findNearest({latitude: req.params.lat1, longitude: req.params.lon1 },spots,0,0);
 	    res.send(nearest);
