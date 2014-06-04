@@ -246,10 +246,19 @@
 				makesum(0);
 			var returnJSON = [];
 			var tempJSON = {};
-	    		tempJSON.LOT = rows[0].LOT;
+	    		tempJSON.LOT = req.params.lot ;
 	    		tempJSON.TYPE = req.params.permit;
 	    		tempJSON.SUM = mysum;
-	    		tempJSON.AVG = (mysum/rows.length).toFixed(0);
+	    		var avg;
+	    		if (isNaN((mysum/rows.length).toFixed(0)))
+	    		{
+	    			avg = 0;
+	    		}
+	    		else
+	    		{
+	    			avg = (mysum/rows.length).toFixed(0);
+	    		}
+	    		tempJSON.AVG = avg;
 	    		tempJSON.ROWS = rows.length;
 	    		tempJSON.TIME = 'TIME'+req.params.time;
 	    		returnJSON.push(tempJSON);

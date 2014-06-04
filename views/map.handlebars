@@ -31,11 +31,12 @@
     }
     </style>
     <script type="text/javascript">
-        var hour = 8; //global var so that all objects can access current hour. Initial to 8 am so we dont face NULL problems.
+        var userHOUR = 8; //global var so that all objects can access current hour. Initial to 8 am so we dont face NULL problems.
         var userCOORDS;
         var userLAT;
         var userLON;
         var map;
+        var userPERMIT = 'S';
     </script>
     <script type="text/javascript">
         $(document).ready(function()
@@ -47,6 +48,11 @@
                 lng: -117.2380,
                 zoom: 15
             });
+            setupMap();
+        });
+
+        var setupMap = function()
+        {
             map.addMarker(
             {
                 lat: 32.883985, 
@@ -59,7 +65,7 @@
                 },
                 click: function(e)
                 {
-                    $.getJSON( "projected/Hopkins/A/"+hour, function(data)
+                    $.getJSON( "projected/Hopkins/"+userPERMIT+"/"+userHOUR, function(data)
                     {
                      
                     })
@@ -91,7 +97,7 @@
                 },
                 click: function(e)
                 {
-                    $.getJSON( "projected/Pangea/A/"+hour, function(data)
+                    $.getJSON( "projected/Pangea/"+userPERMIT+"/"+userHOUR, function(data)
                     {
                      
                     })
@@ -111,6 +117,7 @@
                       });
                 }
             });
+
             map.addMarker(
             { 
                 lat: 32.877384, 
@@ -123,15 +130,17 @@
                 },
                 click: function(e)
                 {
-                    $.getJSON( "projected/Gilman/A/"+hour, function(data)
+                    $.getJSON( "projected/Gilman/"+userPERMIT+"/"+userHOUR, function(data)
                     {
-                     
+          
                     })
                       .done(function(data)
                       {
-                        var LOT = data[0].LOT;
-                        var AVG = data[0].AVG;
-                       document.getElementById("gilmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
+                        
+                            var LOT = data[0].LOT;
+                            var AVG = data[0].AVG;
+
+                           document.getElementById("gilmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
                       })
                       .fail(function(data)
                       {
@@ -139,7 +148,6 @@
                       })
                       .always(function(data)
                       {
-
                       });
                 }
             });
@@ -155,7 +163,7 @@
                 },
                 click: function(e)
                 {
-                    $.getJSON( "projected/Arbor/A/"+hour, function(data)
+                    $.getJSON( "projected/Arbor/"+userPERMIT+"/"+userHOUR, function(data)
                     {
                      
                     })
@@ -193,10 +201,11 @@
                     })
                       .done(function(data)
                       {
+
                         var LOT = data[0].LOT;
                         var AVG = data[0].AVG;
                        document.getElementById("bachmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
-                       
+
                       })
                       .fail(function(data)
                       {
@@ -208,7 +217,7 @@
                       });
                 }
             });
-        });
+        };
 
         
     </script>
@@ -218,17 +227,41 @@
     
     <!-- TOP NAVIGATION BAR -->
 
-    <div class="navbar navbar-default navbar navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
       <div class="container">          
         <div class="navbar-header">
+        
         <button type="button" class="navbar-toggle btn btn-primary btn-xs" data-toggle="offcanvas">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="glyphicon glyphicon-list"></span>
             
+        </button>
+        <button type="button" class="navbar-toggle btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-map-marker"></span>
         </button>
           <a class="navbar-brand" href="/">tritonPARK</a>
         </div> 
+      </div>
+    </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Leaving Spot Open</h4>
+          </div>
+          <div class="modal-body">
+             <form class="form-inline">
+                                <input id="spotinfo" class="form-control" type="text" placeholder="Spot Comments" />
+                                
+                                </form>
+          </div>
+          <div class="modal-footer">
+            
+            <button type="submit" class="btn btn-primary pull-right" onclick="doSomething()">Open Spot Here!</button>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -241,37 +274,32 @@
             </div>
           
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <h4>Permit Type:</h4>
               <div class="list-group">
-                <a href="#" class="list-group-item active">Permit Type:</a>
-                <a href="#" class="list-group-item">Student (S)</a>
-                <a href="#" class="list-group-item">Graudate (B)</a>
-                <a href="#" class="list-group-item">Faculty (A)</a>
-                <a href="#" class="list-group-item">Visitor (V)</a>
+                
+                <a href="#" class="list-group-item" onclick="setPermitType('S')">Student (S)</a>
+                <a href="#" class="list-group-item" onclick="setPermitType('B')">Graudate (B)</a>
+                <a href="#" class="list-group-item" onclick="setPermitType('A')">Faculty (A)</a>
+                <a href="#" class="list-group-item" onclick="setPermitType('V')">Visitor (V)</a>
               </div>
+              
             </div><!--/span-->
+
+            
         </div><!--/row-->
         <hr />
-       <center>
-        <div>
-            <div class="col-lg-6 col-md-6">
-                <div class="well">
-                    <center>
-                    When do you plan to park?
+
+<div class="row container"><div class="well">
+                    
+                    Time to Park:
                         <br>
-                    <input type="text" class="slider" value="8:00AM" id="sl1" data-slider-min="8" data-slider-max="17" data-slider-handle="round">
-                    <p id="updateme">Select Hour</p>
-                </div></center>
+                    <input type="text" class="slider" value="8:00AM" id="sl1" data-slider-min="8" data-slider-max="17" data-slider-handle="round" width="25">
+                    <p id="updateme">Current: 8:00 am</p>
+                </div></div>
                 
                 
-                <div class="col-lg-6 col-md-6">
-                    <div class="well">
-                            <center>
-                                <input id="spotinfo" class="form-control" type="text" placeholder="Name of Parking Lot / Structure, Type of Space Available, Time" />
-                                <br>
-                                <button type="submit" class="btn btn-primary" onclick="doSomething()">Open Spot Here!</button>
-                            </center>               
-                    </div>
-                </div>  
+                
+
     </div><!--/.container-->
     </center>
 <script type="text/javascript">
@@ -280,6 +308,7 @@ $('.slider').slider(
   formater: function(value)
   {
      hour = value;
+     userHOUR = value;
     var ampm = 'am';
     if(value > 12)
     {
@@ -323,6 +352,7 @@ $('.slider').slider(
         }
         socket.emit('realtime', myObject);
         $('#spotinfo').val('');
+        $('#myModal').modal('hide')
         return false;
       };
 
@@ -352,6 +382,23 @@ $('.slider').slider(
         userLAT = (Math.floor(userCOORDS.latitude*10000000)/10000000);
         userLON =  (Math.floor(userCOORDS.longitude*10000000)/10000000);
     };
+
+    var setPermitType = function(permitType)
+    {
+        userPERMIT = permitType;
+    }
+
+    var regenerateMarkers = function()
+    {
+        map.removeMarkers();
+        setupMap();
+    }
+    $('.list-group-item').on('click',function(e){
+    var previous = $(this).closest(".list-group").children(".active");
+    previous.removeClass('active'); // previous list-item
+    $(e.target).addClass('active'); // activated list-item
+  });
+    setInterval(regenerateMarkers, 60*1000 );
     $(document).ready(initiateGeoLocation());
     </script>
 

@@ -6,10 +6,5 @@ TODO:
     
     PANGEA 32.884326, -117.242982
     GILMAN
-        
-
-- decide how to remove map pins based on broadcast system, or decide to not put on the map to begin with.
-	-timer seems most easy.
-
-- integrate selectable parking pass type.
+       
 	
