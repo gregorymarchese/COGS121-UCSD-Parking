@@ -35,7 +35,7 @@
 	var error = require('./routes/error');
 	var map = require('./routes/map');
 	app.get('/', map.view);
-	//app.get('/*', error.view);
+	app.get('/error', error.view);
 
 //================================================================================================================================================================================================
 // INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY	INVENTORY

@@ -3,6 +3,10 @@ TODO:
 
 -add the JSON loading of various map locations
 	- need to get LAT/LON of major garages and spaces.
+    
+    PANGEA 32.884326, -117.242982
+    GILMAN
+        
 
 - decide how to remove map pins based on broadcast system, or decide to not put on the map to begin with.
 	-timer seems most easy.
