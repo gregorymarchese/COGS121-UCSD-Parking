@@ -49,177 +49,6 @@
             });
             setupMap();
         });
-
-        var xhr = $.getJSON('/geojson');
-
-        function setupMap()
-        {
-            map.addMarker(
-            {
-                lat: 32.883985, 
-                lng: -117.239276,
-                title: 'Hopkins',
-                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
-                infoWindow:
-                {
-                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="hopkinIW">Hopkins</p>'
-                },
-                click: function(e)
-                {
-                    $.getJSON( "projected/Hopkins/"+userPERMIT+"/"+userHOUR, function(data)
-                    {
-                     
-                    })
-                      .done(function(data)
-                      {
-                        var LOT = data[0].LOT;
-                        var AVG = data[0].AVG;
-                       document.getElementById("hopkinIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
-                      })
-                      .fail(function(data)
-                      {
-                       
-                      })
-                      .always(function(data)
-                      {
-
-                      });
-                }
-            });
-            map.addMarker(
-            { 
-                lat: 32.884326, 
-                lng: -117.242982,
-                title: 'Pangea',
-                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
-                infoWindow:
-                {
-                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="pangeaIW">Pangea</p>'
-                },
-                click: function(e)
-                {
-                    $.getJSON( "projected/Pangea/"+userPERMIT+"/"+userHOUR, function(data)
-                    {
-                     
-                    })
-                      .done(function(data)
-                      {
-                        var LOT = data[0].LOT;
-                        var AVG = data[0].AVG;
-                       document.getElementById("pangeaIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
-                      })
-                      .fail(function(data)
-                      {
-                       
-                      })
-                      .always(function(data)
-                      {
-
-                      });
-                }
-            });
-
-            map.addMarker(
-            { 
-                lat: 32.877384, 
-                lng: -117.233585,
-                title: 'Gilman',
-                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
-                infoWindow:
-                {
-                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="gilmanIW">Gilman</p>'
-                },
-                click: function(e)
-                {
-                    $.getJSON( "projected/Gilman/"+userPERMIT+"/"+userHOUR, function(data)
-                    {
-          
-                    })
-                      .done(function(data)
-                      {
-                        
-                            var LOT = data[0].LOT;
-                            var AVG = data[0].AVG;
-
-                           document.getElementById("gilmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
-                      })
-                      .fail(function(data)
-                      {
-                       
-                      })
-                      .always(function(data)
-                      {
-                      });
-                }
-            });
-            map.addMarker(
-            { 
-                lat: 32.753918, 
-                lng: -117.167601,
-                title: 'Arbor',
-                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
-                infoWindow:
-                {
-                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="arborIW">Arbor</p>'
-                },
-                click: function(e)
-                {
-                    $.getJSON( "projected/Arbor/"+userPERMIT+"/"+userHOUR, function(data)
-                    {
-                     
-                    })
-                      .done(function(data)
-                      {
-                        var LOT = data[0].LOT;
-                        var AVG = data[0].AVG;
-                       document.getElementById("arborIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
-                      })
-                      .fail(function(data)
-                      {
-                       
-                      })
-                      .always(function(data)
-                      {
-
-                      });
-                }
-            });
-            map.addMarker(
-            { 
-                lat: 32.753882, 
-                lng: -117.164689,
-                title: 'Bachman',
-                icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
-                infoWindow:
-                {
-                    content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="bachmanIW">Bachman</p>'
-                },
-                click: function(e)
-                {
-                    $.getJSON( "projected/Bachman/A/"+hour, function(data)
-                    {
-                     
-                    })
-                      .done(function(data)
-                      {
-
-                        var LOT = data[0].LOT;
-                        var AVG = data[0].AVG;
-                       document.getElementById("bachmanIW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
-
-                      })
-                      .fail(function(data)
-                      {
-                       
-                      })
-                      .always(function(data)
-                      {
-
-                      });
-                }
-            });
-        };
-
         
     </script>
 </head>
@@ -402,6 +231,48 @@ $('.slider').slider(
     setInterval(regenerateMarkers, 60*1000 );
 
     $(document).ready(initiateGeoLocation());
+
+    function setupMap()
+    {
+      var jqxhr = $.getJSON( "/geo", function(){})
+      .done(function(data)
+      {
+        for(var i =0; i<17; i++)
+        {
+
+          map.addMarker(
+          {
+              lat: data[i].LAT, 
+              lng: data[i].LON,
+              title: data[i].LOT,
+              icon  : 'http://maps.google.com/mapfiles/kml/paddle/wht-blank.png',
+              details:
+              {
+                LOT: data[i].LOT
+              },
+              infoWindow:
+              {
+                  content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="'+data[i].LOT+'IW">'+data[i].LOT+'</p>'
+              },
+              click: function(e)
+              {
+                  
+                  var ourLOT = e.details.LOT
+                  $.getJSON( "projected/"+ourLOT+"/"+userPERMIT+"/"+userHOUR, function(data)
+                  {
+                   
+                  })
+                    .done(function(data)
+                    {
+                      var LOT = e.details.LOT;
+                      var AVG = data[0].AVG;
+                     document.getElementById(LOT+"IW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
+                    });
+              }
+          });    
+        }
+      });
+    };
     </script>
 
 
