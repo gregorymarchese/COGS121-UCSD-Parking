@@ -37,8 +37,7 @@
         var userLON;
         var map;
         var userPERMIT = 'S';
-    </script>
-    <script type="text/javascript">
+
         $(document).ready(function()
         {
             map = new GMaps(
@@ -51,7 +50,9 @@
             setupMap();
         });
 
-        var setupMap = function()
+        var xhr = $.getJSON('/geojson');
+
+        function setupMap()
         {
             map.addMarker(
             {
@@ -252,7 +253,7 @@
             <h4 class="modal-title" id="myModalLabel">Leaving Spot Open</h4>
           </div>
           <div class="modal-body">
-             <form class="form-inline">
+             <form class="form-inline" onsubmit="doSomething()">
                                 <input id="spotinfo" class="form-control" type="text" placeholder="Spot Comments" />
                                 
                                 </form>
@@ -277,7 +278,7 @@
             <h4>Permit Type:</h4>
               <div class="list-group">
                 
-                <a href="#" class="list-group-item" onclick="setPermitType('S')">Student (S)</a>
+                <a href="#" class="list-group-item active" onclick="setPermitType('S')">Student (S)</a>
                 <a href="#" class="list-group-item" onclick="setPermitType('B')">Graudate (B)</a>
                 <a href="#" class="list-group-item" onclick="setPermitType('A')">Faculty (A)</a>
                 <a href="#" class="list-group-item" onclick="setPermitType('V')">Visitor (V)</a>
@@ -399,6 +400,7 @@ $('.slider').slider(
     $(e.target).addClass('active'); // activated list-item
   });
     setInterval(regenerateMarkers, 60*1000 );
+
     $(document).ready(initiateGeoLocation());
     </script>
 

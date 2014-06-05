@@ -266,6 +266,30 @@
 		});
 	});
 
+	app.get('/geo', function(req,res)
+	{
+		db.query('SELECT * FROM GEO',function(err,rows,fields)
+		{
+			if(err)throw err;
+			var mysum= 0;
+			var returnJSON = [];
+				function makeJSON(i)
+				{ 
+	  				if (i < rows.length)
+	  				{
+	  					var tempJSON = {};
+	  					tempJSON.LOT = rows[i].LOT ;
+	  					tempJSON.LAT = rows[i].LAT;
+	  					tempJSON.LON = rows[i].LON;
+	  					returnJSON.push(tempJSON);
+	    				makeJSON(i+1);
+	   				}
+				}
+			makeJSON(0);
+			res.json(returnJSON);
+		});
+	});
+
 
 //================================================================================================================================================================================================
 //GEO	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	GEO 	
