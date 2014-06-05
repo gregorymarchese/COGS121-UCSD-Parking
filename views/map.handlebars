@@ -221,18 +221,14 @@ $('.slider').slider(
         userPERMIT = permitType;
     }
 
-    var regenerateMarkers = function()
-    {
-        map.removeMarkers();
-        setupMap();
-    }
+
     $('.list-group-item').on('click',function(e){
     var previous = $(this).closest(".list-group").children(".active");
     previous.removeClass('active'); // previous list-item
     $(e.target).addClass('active'); // activated list-item
   });
-    setInterval(regenerateMarkers, 60*1000 );
-
+    setInterval(map.removeMarkers(), 180*1000 );
+    setInterval(setupMap(), 180*1000 );
     $(document).ready(initiateGeoLocation());
 
     function setupMap()
