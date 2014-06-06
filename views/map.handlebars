@@ -53,6 +53,10 @@
         position: absolute;
         min-height: 200px;
     }
+    .gmnoprint
+    {
+      display: none;
+    }
     </style>
     <script type="text/javascript">
         var userHOUR = 8; //global var so that all objects can access current hour. Initial to 8 am so we dont face NULL problems.
@@ -149,7 +153,7 @@
 
     </center>
 <script type="text/javascript">
-$('.slider').slider(
+/*$('.slider').slider(
 {
   formater: function(value)
   {
@@ -182,7 +186,7 @@ $('.slider').slider(
         ampm = 'pm'
     }
     document.getElementById("updateme").innerHTML = "Currently Selected Time: " + hour + ":00 "+ampm;
-  });</script>
+  });*/</script>
     <script type="text/javascript">
 
     var socket = io.connect();
