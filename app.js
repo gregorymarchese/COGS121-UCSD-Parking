@@ -337,11 +337,13 @@ io.on('connection', function(socket)
 //================================================================================================================================================================================================
 //TEXT MESSAGE		TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE	TEXT MESSAGE
 //================================================================================================================================================================================================
-app.post('/registernotification', function(req, res)
+app.post('/notify', function(req, res)
 {
 	var date = new Date();
     var future =  new Date(date.getFullYear(), date.getMonth(), date.getDate(), req.body.hour,req.body.min ,0,0);
-	if(req.body.num.length != 12 )
+    console.log(req.body);
+    var phone = "+1"+req.body.num;
+	if(phone.length != 12 )
 	{
 		res.json({ status: "bad phone" });
 	}

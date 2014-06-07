@@ -28,7 +28,16 @@
     <style>
     .popup_content
     {
-        color: #000 !important;
+        
+        width: 150px;
+        min-width: 150px;
+        height: 165px !important;
+        min-height: 165px !important;
+        text-align: center;
+    }
+    #infobox
+    {
+      background-color: #ff1cae !important;
     }
     html, body
     {
@@ -48,6 +57,11 @@
     .controls
     {
       box-shadow: 0px 8px 5px -5px #999;
+      border: 2px solid #2c3e50;
+    }
+    .initHide
+    {
+      display: none;
     }
     #map
     {
@@ -67,6 +81,18 @@
       width: 100%;
       min-width: 100%;
       text-align: left;
+    }
+    .numOpen
+    {
+      font-size: 36px;
+    }
+    .navlogo
+    {
+      margin-top: -10px;
+    }
+    .navbar, .btn
+    {
+      background-image: url('images/nav.png');
     }
     </style>
     <script type="text/javascript">
@@ -110,7 +136,7 @@
         <button type="button" class="navbar-toggle btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal2">
         <span class="glyphicon glyphicon-phone"></span>
         </button>
-          <a class="navbar-brand" href="/">tritonPARK</a>
+          <a class="navbar-brand" href="/"><img src="images/sw.png" class="navlogo">tritonPARK</a>
         </div> 
       
     </div>
@@ -124,7 +150,7 @@
             <h4 class="modal-title" id="myModalLabel">Leaving Spot Open</h4>
           </div>
           <div class="modal-body">
-             <form class="form-inline" onsubmit="doNotify()">
+             <form class="form-group" onsubmit="doNotify()">
                                 <input id="spotinfo" class="form-control" type="text" placeholder="Spot Comments" />
                                 
                                 </form>
@@ -145,10 +171,11 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title" id="myModalLabel">Set Parking Expiriation Reminder</h4>
           </div>
+          <form id="form1">
           <div class="modal-body">
              <div class="form-group">
                 <label for="num">Phone Number</label>
-                <input type="phone" class="form-control" id="num" placeholder="+18585340000">
+                <input type="phone" class="form-control" id="num" placeholder="8585340000">
             </div>
              <div class="form-group">
                 <label for="hour">Hour</label>
@@ -157,13 +184,17 @@
              <div class="form-group">
                 <label for="min">Minute</label>
                 <input type="number" min="0" max="60" class="form-control" id="min" placeholder="30">
-                <input type="hidden" value="Your parking permit is expired. Please renew it or move your vehicle.">
-            </div>                    
+                <input type="hidden" id="message" value="Your parking permit is expired. Please renew it or move your vehicle.">
+            </div> 
+            <div class="alert alert-success initHide" id="textGood">Reminder Scheduled</div> 
+            <div class="alert alert-danger initHide" id="textError">Failed to Schedule</div>               
           </div>
+          
           <div class="modal-footer">
             
             <button type="submit" class="btn btn-primary pull-right" onclick="">Set Reminder</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -186,8 +217,8 @@
               </div>
               <div class="pull-left">
                 <h4>Time to Park:</h4>
-                <div class="input-group" style="padding-right: 20px;">
-                  <span class="input-group-btn input-group-lg">
+                <div class="input-group input-group-sm" style="padding-right: 20px;">
+                  <span class="input-group-btn">
                     <button class="btn btn-primary" type="button" onclick="doTime('m')"><span class="glyphicon glyphicon-minus"></span></button>
                   </span>
                   <input type="text" class="form-control" id="hourbox" value="8:00 am" />
@@ -313,9 +344,9 @@
       var jqxhr = $.getJSON( "/geo", function(){})
       .done(function(data)
       {
-        for(var i =0; i<17; i++)
+        var nums = data.length;
+        for(var i =0; i<nums; i++)
         {
-
           map.addMarker(
           {
               lat: data[i].LAT, 
@@ -328,7 +359,8 @@
               },
               infoWindow:
               {
-                  content: '<p class="popup_content" style="width:200px; height: 200px; overflow: hidden;" id="'+data[i].LOT+'IW">'+data[i].LOT+'</p>'
+                  //content: '<div class="popup_content" style=" min-height: 300px !important; overflow: hidden;" id="'+data[i].LOT+'IW">'+data[i].LOT+'</div>'
+                  content:'<div class="popup_content"><div class="panel panel-default"><div class="panel-heading"><h1 class="panel-title"><div id="'+data[i].LOT+'IWT">'+data[i].LOT+'</div></h1></div><div class="panel-body"><div id="'+data[i].LOT+'IW" class="numOpen"></div></div><div class="panel-footer">projected open</div></div></div>'
               },
               click: function(e)
               {
@@ -342,13 +374,40 @@
                     {
                       var LOT = e.details.LOT;
                       var AVG = data[0].AVG;
-                     document.getElementById(LOT+"IW").innerHTML = '<center><h3>'+LOT+'</h3></center><hr /><center><h5> predicted open: <h2>'+AVG+'</h2></center>';
+                      document.getElementById(LOT+"IW").innerHTML = AVG;
+                      document.getElementById(LOT+"IWT").innerHTML = LOT;
+
                     });
               }
           });    
         }
       });
     };
+
+    $('#form1').submit(function(event) {
+                event.preventDefault();
+                alert($(this).serialize);
+                var data = {};
+                data.num = $( "#num" ).val()
+                data.hour = $( "#hour" ).val()
+                data.min = $( "#min" ).val()
+                data.message = 'Your parking permit is expired. Please renew it or move your vehicle.'
+                $.ajax({
+                        type: 'POST',
+                        url: '/notify',
+                        data: data,
+                        dataType: 'json',
+                        success: function (data)
+                        {
+                          $("#textGood").show();
+                        },
+                        error: function(data)
+                        {
+                           $("#textError").show();
+                        }
+                });
+        });
+
     </script>
 
 
