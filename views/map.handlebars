@@ -43,12 +43,17 @@
     .navbar
     {
       margin-bottom:0;
+      box-shadow: 0px 8px 5px -5px #999;
+    }
+    .controls
+    {
+      box-shadow: 0px 8px 5px -5px #999;
     }
     #map
     {
       min-width:100%;
       width:100%;
-        top: 65px;
+        top: 60px;
         bottom: 0;
         position: absolute;
         min-height: 200px;
@@ -56,6 +61,12 @@
     .gmnoprint
     {
       display: none;
+    }
+    .btn-wide
+    {
+      width: 100%;
+      min-width: 100%;
+      text-align: left;
     }
     </style>
     <script type="text/javascript">
@@ -96,6 +107,9 @@
         <button type="button" class="navbar-toggle btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
         <span class="glyphicon glyphicon-map-marker"></span>
         </button>
+        <button type="button" class="navbar-toggle btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal2">
+        <span class="glyphicon glyphicon-phone"></span>
+        </button>
           <a class="navbar-brand" href="/">tritonPARK</a>
         </div> 
       
@@ -110,14 +124,45 @@
             <h4 class="modal-title" id="myModalLabel">Leaving Spot Open</h4>
           </div>
           <div class="modal-body">
-             <form class="form-inline" onsubmit="doSomething()">
+             <form class="form-inline" onsubmit="doNotify()">
                                 <input id="spotinfo" class="form-control" type="text" placeholder="Spot Comments" />
                                 
                                 </form>
           </div>
           <div class="modal-footer">
             
-            <button type="submit" class="btn btn-primary pull-right" onclick="doSomething()">Open Spot Here!</button>
+            <button type="submit" class="btn btn-primary pull-right" onclick="doNotify()">Notify Others</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Set Parking Expiriation Reminder</h4>
+          </div>
+          <div class="modal-body">
+             <div class="form-group">
+                <label for="num">Phone Number</label>
+                <input type="phone" class="form-control" id="num" placeholder="+18585340000">
+            </div>
+             <div class="form-group">
+                <label for="hour">Hour</label>
+                <input type="number" min="0" max="24" class="form-control" id="hour" placeholder="5">
+            </div>
+             <div class="form-group">
+                <label for="min">Minute</label>
+                <input type="number" min="0" max="60" class="form-control" id="min" placeholder="30">
+                <input type="hidden" value="Your parking permit is expired. Please renew it or move your vehicle.">
+            </div>                    
+          </div>
+          <div class="modal-footer">
+            
+            <button type="submit" class="btn btn-primary pull-right" onclick="">Set Reminder</button>
           </div>
         </div>
       </div>
@@ -126,72 +171,58 @@
     
 <div id="map"></div>
 
-        <div class="row row-offcanvas row-offcanvas-right">
-            <div class="col-xs-12 col-sm-9">
+        <div class="row row-offcanvas row-offcanvas-right ">
+          <div class="col-xs-12 col-sm-9">
                 
             </div>
-          
-            <div class="col-xs-6 col-sm-3 sidebar-offcanvas well" id="sidebar" role="navigation">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas well controls" id="sidebar" role="navigation">
             <h4>Permit Type:</h4>
-              <div class="list-group">
+              <div class="list-group" style="padding-right: 20px;">
                 
                 <a href="#" class="list-group-item active" onclick="setPermitType('S')">Student (S)</a>
                 <a href="#" class="list-group-item" onclick="setPermitType('B')">Graudate (B)</a>
                 <a href="#" class="list-group-item" onclick="setPermitType('A')">Faculty (A)</a>
                 <a href="#" class="list-group-item" onclick="setPermitType('V')">Visitor (V)</a>
               </div>
-              <div class="list-group">
-              <h4>Time to Park:</h4>
-                        
-                    <input type="text" class="slider" value="8:00AM" id="sl1">
-                    <p id="updateme">Current: 8:00 am</p>
+              <div class="pull-left">
+                <h4>Time to Park:</h4>
+                <div class="input-group" style="padding-right: 20px;">
+                  <span class="input-group-btn input-group-lg">
+                    <button class="btn btn-primary" type="button" onclick="doTime('m')"><span class="glyphicon glyphicon-minus"></span></button>
+                  </span>
+                  <input type="text" class="form-control" id="hourbox" value="8:00 am" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" onclick="doTime('p')"><span class="glyphicon glyphicon-plus"></span></button>
+                  </span>
+                </div><!-- /input-group -->
               </div>
+              <div class="pull-left visible-lg visible-md visible-sm">
+                <h4>Tools:</h4>
+                <div class="row" style="padding-right: 20px;">
+                <div class="col-lg-12 col-md-12 col-sm-11">
+                  <button type="button" class="btn btn-primary btn-md btn-wide" data-toggle="modal" data-target="#myModal">
+                    <span class="glyphicon glyphicon-map-marker"></span>Notify Others of Open Spot
+                </button>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-11" style="padding-top: 10px;">
+                <button type="button" class="btn btn-primary btn-md btn-wide" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-phone"></span> Set Expiration Reminder
+                </button>
+                </div>
+                </div><!-- /input-group -->
+              </div>
+
             </div><!--/span-->
 
             
         </div><!--/row-->
 
     </center>
-<script type="text/javascript">
-/*$('.slider').slider(
-{
-  formater: function(value)
-  {
-     hour = value;
-     userHOUR = value;
-    var ampm = 'am';
-    if(value > 12)
-    {
-        hour = value -12;
-        ampm = 'pm';
-    }
-    if(value ==12)
-    {
-        ampm = 'pm'
-    }
-    return 'Current Time: '+hour + ':00 '+ampm;
-  }
-})
-  .on('slideStop', function(ev){
-            hour = ev.value;
-            var ampm = 'am';
 
-            if(ev.value > 12)
-            {
-                hour = ev.value -12;
-                ampm = 'pm';
-            }
-                if(ev.value ==12)
-    {
-        ampm = 'pm'
-    }
-    document.getElementById("updateme").innerHTML = "Currently Selected Time: " + hour + ":00 "+ampm;
-  });*/</script>
     <script type="text/javascript">
 
     var socket = io.connect();
-      //$('#openparking').submit(function()
-      function doSomething()
+      function doNotifiy()
       {
         initiateGeoLocation();
         var myObject =
@@ -235,6 +266,7 @@
 
     var setPermitType = function(permitType)
     {
+        map.hideInfoWindows();
         userPERMIT = permitType;
     }
 
@@ -247,6 +279,34 @@
     setInterval(function(){map.removeMarkers();}, 180*1000 );
     setInterval(setupMap, 180*1000 );
     $(document).ready(initiateGeoLocation());
+    function doTime(operation)
+    {
+      map.hideInfoWindows();
+      if(operation === 'p')
+      {
+        if(userHOUR+1 > 17) return;
+        userHOUR = userHOUR+1;
+      }
+      if(operation === 'm')
+      {
+        if(userHOUR-1 < 8) return;
+        userHOUR = userHOUR -1;
+      }
+      var ampm = 'am';
+      var displayHour = userHOUR;
+      if(displayHour > 12)
+      {
+        displayHour = displayHour - 12;
+        ampm = 'pm';
+      }
+      if(displayHour === 12)
+      {
+        ampm = 'pm';
+      }
+
+
+      $('#hourbox').val(displayHour+":00 "+ampm);
+    };
 
     function setupMap()
     {
