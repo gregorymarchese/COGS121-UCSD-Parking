@@ -150,15 +150,16 @@
             <h4 class="modal-title" id="myModalLabel">Leaving Spot Open</h4>
           </div>
           <div class="modal-body">
-             <form class="form-group" onsubmit="doNotify()">
+             <form class="form-group" id="makeNotify">
                                 <input id="spotinfo" class="form-control" type="text" placeholder="Spot Comments" />
                                 
-                                </form>
+                                
           </div>
           <div class="modal-footer">
             
-            <button type="submit" class="btn btn-primary pull-right" onclick="doNotify()">Notify Others</button>
+            <button type="submit" class="btn btn-primary pull-right" onclick="">Notify Others</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -408,6 +409,11 @@
                         }
                 });
         });
+
+    $('#makeNotify').submit(function(event){
+      event.preventDefault();
+      doNotify();
+    });
 
     </script>
 
